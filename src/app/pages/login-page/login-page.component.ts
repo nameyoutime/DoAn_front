@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginPageComponent implements OnInit {
 
-  constructor(private authSer: AuthService) {
+  constructor(private authSer: AuthService,private router: Router) {
 
   }
 
@@ -16,7 +17,12 @@ export class LoginPageComponent implements OnInit {
   }
 
   loginWithGg() {
-    this.authSer.loginWithGg();
+    this.authSer.loginWithGg().then((result)=>{
+      if(result) {
+        
+        this.router.navigate(['/home'])
+      }
+    });
   }
   signOut() {
     try {

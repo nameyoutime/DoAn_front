@@ -27,12 +27,8 @@ export class AuthService {
   loginWithGg() {
     const provider = new firebase.default.auth.GoogleAuthProvider();
     try {
-      this.fireAuth.signInWithPopup(provider).then(
-        function(){
-          this.router.navigate(["/home"]);
-        })
-      ;
-      
+      return this.fireAuth.signInWithPopup(provider);
+
 
     }
     catch (err) {

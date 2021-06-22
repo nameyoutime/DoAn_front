@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: 'loginPage', loadChildren: () => import('./pages/login-page/login-page.module').then(m => m.LoginPageModule) },
   { path: 'home', canActivate: [AuthGuardService], loadChildren: () => import('./pages/table-page/table-page.module').then(m => m.TablePageModule) },
 
-  { path: '**', component: NotFoundComponent}
+  { path: '**', canActivate: [AuthGuardService], component: NotFoundComponent}
   
 ];
 
