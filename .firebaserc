@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "quanly-92f96": {
+      "hosting": {
+        "mdb-angular-free": [
+          "quanly-92f96"
+        ]
+      }
+    }
+  }
+}

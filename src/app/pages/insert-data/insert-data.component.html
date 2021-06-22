@@ -1,0 +1,73 @@
+<!-- <form [formGroup]="insertFrm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+        <label for="title">Item title</label>
+        <input type="text" class="form-control" from aria-describedby="UserNameHelp" placeholder="Enter title"
+            formControlName="title">
+        <div *ngIf="insertFrm.get('title').touched==false && insertFrm.get('title').invalid==true">Invalid</div>
+        <input type="text" class="form-control" from aria-describedby="UserNameHelp" placeholder="Enter note"
+            formControlName="note">
+            <div *ngIf="insertFrm.get('note').touched==false && insertFrm.get('note').invalid==true">Invalid</div>
+
+        <button type="submit"></button>
+
+    </div>
+</form> -->
+
+<div class="container">
+    <form id="contact" [formGroup]="insertFrm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <h3>Insert Form</h3>
+            <h4>Fill in the form</h4>
+            <fieldset>
+                <input placeholder="Enter title" type="text" formControlName="title">
+            </fieldset>
+            <fieldset>
+                <input placeholder="Enter note" type="text" formControlName="note">
+            </fieldset>
+            <fieldset>
+                <input placeholder="Enter price" type="number" formControlName="price">
+            </fieldset>
+            <fieldset>
+                <input placeholder="Enter quanlity" type="number" formControlName="quanlity">
+            </fieldset>
+            <fieldset>
+                <input (change)="onFileChange($event)" type="file" accept=".jpg,.jpeg,.png" class="form-control" id="customFile" />
+            </fieldset>
+            <!-- <label class="form-label" for="customFile">Default file input example</label> -->
+            
+
+
+            <fieldset class="container">
+                <div class="row" style="margin-bottom: 5%;">
+
+                    <ng-select class=" w-25 col-md" [(ngModel)]="selectedTag" (change)="check(selectedTag)"
+                        formControlName="tag">
+                        <ng-option *ngFor="let tag of tags" [value]="tag.id">{{tag.name}}</ng-option>
+                    </ng-select>
+
+                    <button class="col-md btn-primary btn-lg btn-floating" (click)="add()">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+           
+            </fieldset>
+
+            <div class="row itemsBlock text-center" style="margin-bottom: 5%;">
+                <div *ngFor="let item of addTag;let i = index" class="col-md-4 col-sm-6 col-12">
+                    <h3 (click)="remove(i)">{{item.name}}</h3>
+                    <!-- <button (click)="remove(i)" id="border" >
+                        <i class="fas fa-minus-circle"></i>
+                    </button> -->
+                </div>
+            </div>
+            <fieldset>
+                <button class="btn btn-primary" name="submit" type="submit" id="contact-submit"
+                    data-submit="...Sending">Create</button>
+            </fieldset>
+        </div>
+        <!-- <p class="copyright">Designed by <a href="https://colorlib.com" target="_blank" title="Colorlib">Colorlib</a>
+        </p> -->
+    </form>
+    <!-- <button (click)="test()"></button> -->
+</div>

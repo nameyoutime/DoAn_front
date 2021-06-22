@@ -1,0 +1,13 @@
+
+    <img [src]="data.img" class="card-img-top" alt="..." />
+    <div class="card-body">
+        <h5 class="card-title">Tag: {{tag}}</h5>
+        <h1 class="card-title">Title: {{data.title}}</h1>
+        <h2 class="card-title">Price: {{data.price}}VNĐ</h2>
+        <h3 class="card-title">Quanlity: {{data.quanlity}}</h3>
+        <p class="card-text">
+            Note: {{data.note}}<br>
+            
+        </p>
+        <button (click)="close()"  type="button" class="btn btn-primary">Close</button>
+    </div>
