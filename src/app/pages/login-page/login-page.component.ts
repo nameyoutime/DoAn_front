@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginPageComponent implements OnInit {
 
-  constructor(private authSer: AuthService,private router: Router) {
+  constructor(private authSer: AuthService, private router: Router) {
 
   }
 
@@ -17,18 +17,19 @@ export class LoginPageComponent implements OnInit {
   }
 
   loginWithGg() {
-    this.authSer.loginWithGg().then((result)=>{
-      if(result) {
-        
-        this.router.navigate(['/home'])
-      }
-    });
+    try {
+      this.authSer.loginWithGg();
+    } catch (error) {
+      console.log("error")
+      return;
+    }
+    this.router.navigate(['/home'])
   }
   signOut() {
     try {
       this.authSer.signOut();
-    
-      
+
+
     } catch (err) {
       // alert("Sigout failed");
 
