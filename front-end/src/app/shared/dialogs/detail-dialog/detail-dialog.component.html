@@ -1,13 +1,15 @@
+<div style="max-width: 20vw;min-width: none;">
 
-    <img [src]="data.img" class="card-img-top" alt="..." />
-    <div class="card-body">
-        <h5 class="card-title">Tag: {{tag}}</h5>
-        <h1 class="card-title">Title: {{data.title}}</h1>
-        <h2 class="card-title">Price: {{data.price}}VNĐ</h2>
-        <h3 class="card-title">Quanlity: {{data.quanlity}}</h3>
-        <p class="card-text">
-            Note: {{data.note}}<br>
-            
-        </p>
-        <button (click)="close()"  type="button" class="btn btn-primary">Close</button>
-    </div>
+    <img [src]="data.img" style="width: 100%;height: 100%;" class="card-img-top" alt="..." />
+</div>
+<div class="card-body">
+    <h5 class="card-title">Tag: {{tag}}</h5>
+    <h1 class="card-title">Title: {{data.title}}</h1>
+    <h2 class="card-title">Price: {{data.price}}VNĐ</h2>
+    <h3 class="card-title">Quanlity: {{data.quanlity}}</h3>
+    <p class="card-text">
+        Note: {{data.note}}<br>
+
+    </p>
+    <button (click)="close()" type="button" class="btn btn-primary">Close</button>
+</div>

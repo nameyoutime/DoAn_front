@@ -31,7 +31,6 @@ export class SignUpPageComponent implements OnInit {
         .registerWithEmail(this.email, this.password)
         .then(() => {
           this.message = 'you are register with data on firbase';
-          alert('suscess!');
         })
         .catch((_error) => {
           this.error = _error;

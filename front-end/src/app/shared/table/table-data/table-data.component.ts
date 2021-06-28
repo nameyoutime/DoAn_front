@@ -28,14 +28,16 @@ export class TableDataComponent implements OnInit {
   img: any;
   imgChanged: boolean;
   constructor(public tableSer: TableService, private dialog: MatDialog, private fb: FormBuilder) {
-    this.imgChanged = false;
   }
 
   ngOnInit(): void {
+    this.imgChanged = false;
     this.collection = this.data;
     this.tags = this.tagsData;
+  }
 
-
+  openTagDialog() {
+    this.dialog.open(TagDialogComponent)
   }
 
   openDetailDialog(data) {
@@ -51,25 +53,22 @@ export class TableDataComponent implements OnInit {
       this.collection = data;
     }
   }
-  removeUpdateTag(index) {
-
-    let temp = this.currentTag.slice();
-    temp.splice(index, 1);
-    this.currentTag = temp;
-
+  valChange(val) {
+    this.val = val;
   }
   addUpdateTag() {
     let temp = this.tableSer.getTagById(this.val);
     this.currentTag.push(temp);
   }
+  removeUpdateTag(index) {
+    let temp = this.currentTag.slice();
+    temp.splice(index, 1);
+    this.currentTag = temp;
 
-  valChange(val) {
-    this.val = val;
   }
 
-  openTagDialog() {
-    this.dialog.open(TagDialogComponent)
-  }
+
+
 
   openUpdateDialog(item) {
     this.currentTag = item.tag.slice();
@@ -83,9 +82,9 @@ export class TableDataComponent implements OnInit {
       quanlity: new FormControl(item.quanlity, Validators.required),
       tag: new FormControl(null, Validators.required),
       img: new FormControl(item.img, Validators.required),
-      id:new FormControl(item.id),
-      user:new FormControl(item.user),
-      dateCreated:new FormControl(item.dateCreated),
+      id: new FormControl(item.id),
+      user: new FormControl(item.user),
+      dateCreated: new FormControl(item.dateCreated),
 
     })
   }

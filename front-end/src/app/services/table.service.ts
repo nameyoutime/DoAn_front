@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AuthService } from './auth.service';
 import { Tag } from '../models/tag-models';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class TableService {
   public tagList: Observable<any[]>;
   private _tableData: Item[]
   private _tags: any[];
-  constructor(private authSer: AuthService, private fireStore: AngularFirestore, private fireData: AngularFireStorage, private http: HttpClient) {
+  constructor(private _snackBar: MatSnackBar, private fireStore: AngularFirestore, private fireData: AngularFireStorage, private http: HttpClient) {
     this._tags = [];
     this.getData();
 
@@ -44,7 +45,12 @@ export class TableService {
       user: user.uid
     }
 
-    await this.http.post(environment.enpoint + "tag-create", data).toPromise();
+    await this.http.post(environment.enpoint + "tag-create", data).toPromise().then(
+      ()=>{
+        this._snackBar.open("Susscess fully created "+data.name,"",{duration:2000});
+      }
+    );
+    
 
   }
   async insertData(data: object) {
@@ -58,19 +64,31 @@ export class TableService {
       user: user.uid,
     };
 
-    await this.http.post(environment.enpoint + "item-create", item).toPromise();
+    await this.http.post(environment.enpoint + "item-create", item).toPromise().then(
+      ()=>{
+        this._snackBar.open("Susscess fully created "+item.title,"",{duration:2000});
+      }
+    );
   }
   async updateData(value: object) {
     let item: Item = {
       ...value,
       dateUpdated: Date.now(),
     };
-    await this.http.put(environment.enpoint +"item-update",item).toPromise();
+    await this.http.put(environment.enpoint +"item-update",item).toPromise().then(
+      ()=>{
+        this._snackBar.open("Susscess fully updated "+item.title,"",{duration:2000});
+      }
+    );
   }
   async deleteData(id: string) {
     let user = JSON.parse(localStorage.getItem("user"));
     let url = `item-delete?id=${id}&user=${user.uid}`;
-    await this.http.delete(environment.enpoint + url).toPromise();
+    await this.http.delete(environment.enpoint + url).toPromise().then(
+      ()=>{
+        this._snackBar.open("Susscess fully deleted item","",{duration:2000});
+      }
+    );
   }
   selectedFile: File = null;
   fb: any;

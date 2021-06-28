@@ -44,71 +44,91 @@ init();
 
 
 app.post("/item-create", (req, res) => {
-    let { id,title,note,price,quanlity,img,tag,user,dateCreated,dateUpdated } = req.body;
+    let { id, title, note, price, quanlity, img, tag, user, dateCreated, dateUpdated } = req.body;
     let data = {
-        id:id,
+        id: id,
         title: title,
         price: price,
-        note:note,
-        quanlity:quanlity,
-        img:img,
-        tag:tag,
-        user:user,
-        dateCreated:dateCreated,
-        dateUpdated:dateUpdated
+        note: note,
+        quanlity: quanlity,
+        img: img,
+        tag: tag,
+        user: user,
+        dateCreated: dateCreated,
+        dateUpdated: dateUpdated
     };
 
     (async () => {
-        
-        await admin.firestore().collection("tableData").doc("user").collection(data.user).doc(data.id).create(data);
-        return res.status(200).send();
+        try {
+            await admin.firestore().collection("tableData").doc("user").collection(data.user).doc(data.id).create(data);
+            return res.status(200).send();
+        } catch (error) {
+            console.log(error);
+            return res.sendStatus(400).send();
+        }
+
     })();
 })
 
 
 app.post("/tag-create", (req, res) => {
-    let { id,name,user } = req.body;
+    let { id, name, user } = req.body;
     let data = {
-        id:id,
+        id: id,
         name: name,
-        user:user
+        user: user
     };
 
     (async () => {
-        
-        await admin.firestore().collection("tag").doc("user").collection(data.user).doc(data.id).create(data);
-        return res.status(200).send();
+        try {
+            await admin.firestore().collection("tag").doc("user").collection(data.user).doc(data.id).create(data);
+            return res.status(200).send();
+        } catch (error) {
+            console.log(error);
+            return res.sendStatus(400).send();
+        }
     })();
 })
 
 
 app.delete("/item-delete", (req, res) => {
-    let { id ,user} = req.query;
+    let { id, user } = req.query;
 
     (async () => {
-        await admin.firestore().collection("tableData").doc("user").collection(user).doc(id).delete();
-        return res.status(200).send();
+        try {
+            await admin.firestore().collection("tableData").doc("user").collection(user).doc(id).delete();
+            return res.status(200).send();
+        } catch (error) {
+            console.log(error);
+            return res.sendStatus(400).send();
+        }
     })();
 
 })
 app.put("/item-update", (req, res) => {
-    let { id,title,note,price,quanlity,img,tag,user,dateCreated,dateUpdated } = req.body;
+    let { id, title, note, price, quanlity, img, tag, user, dateCreated, dateUpdated } = req.body;
     let data = {
-        id:id,
+        id: id,
         title: title,
         price: price,
-        note:note,
-        quanlity:quanlity,
-        img:img,
-        tag:tag,
-        user:user,
-        dateCreated:dateCreated,
-        dateUpdated:dateUpdated
+        note: note,
+        quanlity: quanlity,
+        img: img,
+        tag: tag,
+        user: user,
+        dateCreated: dateCreated,
+        dateUpdated: dateUpdated
     };
 
     (async () => {
-        await admin.firestore().collection("tableData").doc("user").collection(data.user).doc(data.id).update(data);
-        return res.status(200).send();
+        try {
+
+            await admin.firestore().collection("tableData").doc("user").collection(data.user).doc(data.id).update(data);
+            return res.status(200).send();
+        } catch (error) {
+            console.log(error);
+            return res.sendStatus(400).send();
+        }
     })();
 
 

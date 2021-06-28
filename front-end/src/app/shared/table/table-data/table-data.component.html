@@ -15,7 +15,7 @@
                     <div>
                         <div class="input-group rounded">
                             <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
-                                aria-describedby="search-addon" [(ngModel)]="term">
+                                aria-describedby="search-addon" [(ngModel)]="term" >
                         </div>
                     </div>
                 </div>
@@ -25,16 +25,14 @@
                 <div class="col-md-4">
                     <div class="d-flex align-items-center justify-content-start flex-wrap">
                         <button id="border" style="margin-right: 1%;"><i class="fas fa-filter"></i></button>
-                        <ng-select class="w-25" [(ngModel)]="selectedTag" (change)="check(selectedTag)">
+                        <ng-select class="w-25" [(ngModel)]="selectedTag" (change)="check(selectedTag)" matTooltip="Filter">
 
                             <ng-option *ngFor="let tag of tags|async" [value]="tag.id">{{tag.name}}</ng-option>
                         </ng-select>
                         <button style="margin-left: 1%;" type="button" class="btn btn-primary btn-floating"
-                            (click)="openTagDialog()">
+                            (click)="openTagDialog()" matTooltip="Add tag">
                             <i class="fas fa-plus"></i>
                         </button>
-                        <!-- <button id="border" (click)="openTagDialog()"><i class="fas fa-plus"></i></button> -->
-
 
                     </div>
                 </div>
@@ -42,10 +40,6 @@
             </div>
         </div>
 
-
-        <!--
-
-        <!--Using items input-->
 
         <div class="table-responsive">
             <table class="table table-bordered " id="dataTable" width="100%" cellspacing="0">
@@ -77,9 +71,9 @@
                     <tr>
                         <th scope="row">{{i+1}}</th>
                         <td (click)="openDetailDialog(item)">{{item.title}}</td>
-                        <td>{{item.note}}</td>
-                        <td>{{item.price}}VNĐ</td>
-                        <td>{{item.quanlity}}</td>
+                        <td (click)="openDetailDialog(item)">{{item.note}}</td>
+                        <td (click)="openDetailDialog(item)">{{item.price}}VNĐ</td>
+                        <td (click)="openDetailDialog(item)">{{item.quanlity}}</td>
                         <table class="table table-borderless">
                             <tr>
                                 <td *ngFor="let tag of item.tag">
@@ -89,27 +83,17 @@
                         </table>
 
                         <td>
-                            <button (click)="openUpdateDialog(item)" type="button" class="btn btn-primary btn-sm px-3"
+                            <button (click)="openUpdateDialog(item)" matTooltip="Update" type="button" class="btn btn-primary btn-sm px-3"
                                 style="margin-right: 3px;">
                                 <i class="fas fa-highlighter"></i>
                             </button>
-                            <button (click)="deleteItem(item.id)" type="button" class="btn btn-danger btn-sm px-3">
+                            <button (click)="deleteItem(item.id)" matTooltip="Delete" type="button" class="btn btn-danger btn-sm px-3">
                                 <i class="fas fa-times"></i>
                             </button>
                         </td>
                     </tr>
 
-                    <!-- <tr
-                        *ngFor="let item of items|async| paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage };let i = index">
-                        <td>{{i+1}}</td>
-                        <td>{{item.name}}</td>
-                        <td>{{item.subtitle}}</td>
-                        <td>
-                            <button class="btn btn-outline-primary" style="margin-right: 1%;"
-                                (click)="open(item)">Update</button>
-                            <button class="btn btn-outline-primary" (click)="del(item.id)">Delete</button>
-                        </td>
-                    </tr> -->
+
                     <!-- form update -->
                     <ng-template #dialogMatSelect>
                         <form [formGroup]="updateFrm" (ngSubmit)="onSubmit()">
@@ -133,6 +117,7 @@
                                     formControlName="quanlity">
                             </div>
                             <fieldset>
+                                <label>Image</label>
                                 <input (change)="onFileChange($event)" type="file" accept=".jpg,.jpeg,.png"
                                     class="form-control" id="customFile" />
                             </fieldset>
@@ -143,21 +128,22 @@
                             <div class="row" style="margin-bottom: 5%;">
 
                                 <ng-select class=" w-25 col-md" [(ngModel)]="selectedTag"
-                                    (change)="valChange(selectedTag)" >
+                                    (change)="valChange(selectedTag)">
                                     <ng-option *ngFor="let tag of tags|async" [value]="tag.id">{{tag.name}}</ng-option>
                                 </ng-select>
 
-                                <button class="col-md btn-primary btn-lg btn-floating">
+                                <button class="col-md btn-primary btn-lg btn-floating"  matTooltip="Add tag">
                                     <i class="fas fa-plus" (click)="addUpdateTag()"></i>
                                 </button>
                             </div>
                         </fieldset>
                         <div class="row itemsBlock text-center" style="margin-bottom: 5%;" id="updateForm">
                             <div *ngFor="let item of currentTag;let i = index" class="col-md-4 col-sm-6 col-12">
-                                <h2 (click)="removeUpdateTag(i)">{{item.name}}</h2>
-                                <!-- <button id="border">
-                                        <i class="fas fa-minus-circle" (click)="removeUpdateTag(i)"></i>
-                                    </button> -->
+                                <!-- <h2 (click)="removeUpdateTag(i)">{{item.name}}</h2> -->
+                                <button type="button" class="mt-1 p-2 btn btn-outline-dark btn-rounded"
+                                    data-mdb-ripple-color="dark" (click)="removeUpdateTag(i)" matTooltip="Remove tag">{{item.name}} <i
+                                        class="fas fa-minus"></i></button>
+
                             </div>
                         </div>
 
@@ -166,6 +152,7 @@
                         <button class="btn btn-primary" (click)="submit.click()">Update</button>
 
                     </ng-template>
+                    <!-- end of form update -->
                 </tbody>
             </table>
             <pagination-controls (pageChange)="p = $event"></pagination-controls>

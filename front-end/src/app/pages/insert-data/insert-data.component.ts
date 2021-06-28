@@ -47,6 +47,7 @@ export class InsertDataComponent implements OnInit {
     }
     // this.tableSer.changeImgURL(this.insertFrm.get('img').value);
     this.tableSer.insertData(this.insertFrm.value);
+ 
     // console.log(this.insertFrm.value);
 
 
