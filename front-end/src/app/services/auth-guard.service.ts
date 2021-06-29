@@ -11,7 +11,9 @@ export class AuthGuardService {
   constructor(private router: Router, private authSer: AuthService) { }
 
   canActivate(): boolean {
-    if (!this.authSer.user) {
+    let user = JSON.parse(localStorage.getItem("user"));
+    if (user == null) {
+      
       this.router.navigate(['/loginPage']);
       return false;
     }

@@ -16,9 +16,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class TableService {
   public List: Observable<Item[]>;
-  public tagList: Observable<any[]>;
+  public tagList: Observable<Tag[]>;
   private _tableData: Item[]
-  private _tags: any[];
+  private _tags: Tag[];
   constructor(private _snackBar: MatSnackBar, private fireStore: AngularFirestore, private fireData: AngularFireStorage, private http: HttpClient) {
     this._tags = [];
     this.getData();
@@ -45,7 +45,7 @@ export class TableService {
       user: user.uid
     }
 
-    await this.http.post(environment.enpoint + "tag-create", data).toPromise().then(
+    await this.http.post<Item>(environment.enpoint + "tag-create", data).toPromise().then(
       ()=>{
         this._snackBar.open("Susscess fully created "+data.name,"",{duration:2000});
       }
@@ -53,7 +53,7 @@ export class TableService {
     
 
   }
-  async insertData(data: object) {
+  async insertData(data: Item) {
     let user = JSON.parse(localStorage.getItem("user"));
     let item: Item = {
       ...data,
@@ -64,18 +64,18 @@ export class TableService {
       user: user.uid,
     };
 
-    await this.http.post(environment.enpoint + "item-create", item).toPromise().then(
+    await this.http.post<Item>(environment.enpoint + "item-create", item).toPromise().then(
       ()=>{
         this._snackBar.open("Susscess fully created "+item.title,"",{duration:2000});
       }
     );
   }
-  async updateData(value: object) {
+  async updateData(value: Item) {
     let item: Item = {
       ...value,
       dateUpdated: Date.now(),
     };
-    await this.http.put(environment.enpoint +"item-update",item).toPromise().then(
+    await this.http.put<Item>(environment.enpoint +"item-update",item).toPromise().then(
       ()=>{
         this._snackBar.open("Susscess fully updated "+item.title,"",{duration:2000});
       }

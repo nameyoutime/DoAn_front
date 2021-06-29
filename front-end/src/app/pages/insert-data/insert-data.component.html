@@ -45,35 +45,32 @@
 
         <div class="container">
             <div class="row" style="margin-bottom: 5%;">
+                <div class="col-md-6">
+                    <ng-select class="w-100" [(ngModel)]="selectedTag" (change)="check(selectedTag)">
+                        <ng-option *ngFor="let tag of tags |async" [value]="tag.id">{{tag.name}}</ng-option>
+                    </ng-select>
 
-                <ng-select class=" w-25 col-md" [(ngModel)]="selectedTag" (change)="check(selectedTag)">
-                    <ng-option *ngFor="let tag of tags |async" [value]="tag.id">{{tag.name}}</ng-option>
-                </ng-select>
 
-                <button class="col-md btn btn-primary" matTooltip="Add tag" (click)="add()">
-                    <i class="fas fa-plus"></i>
-                </button>
+
+                </div>
+                <div class="col-md ml-1">
+                    <button class="h-100 p-2 btn btn-primary" matTooltip="Add tag" (click)="add()">
+                        <i class="fas fa-plus"></i>
+                    </button>
+
+                </div>
             </div>
 
         </div>
 
         <div class="row itemsBlock text-center" style="margin-bottom: 5%;">
             <div *ngFor="let item of addTag;let i = index" class="col-md-4 col-sm-6 col-12">
-                <!-- <h3 (click)="remove(i)"></h3> -->
-                <button matTooltip="Remove tag" type="button" class="mt-1 p-2 btn btn-outline-dark btn-rounded" data-mdb-ripple-color="dark"
-                    (click)="remove(i)">{{item.name}} <i class="fas fa-minus"></i></button>
-                <!-- <button (click)="remove(i)" id="border" >
-                            <i class="fas fa-minus-circle"></i>
-                        </button> -->
+                <button matTooltip="Remove tag" type="button" class="mt-1 p-2 btn btn-outline-dark btn-rounded"
+                    data-mdb-ripple-color="dark" (click)="remove(i)">{{item.name}} <i class="fas fa-minus"></i></button>
             </div>
         </div>
         <div>
-            <button class="btn btn-primary" (click)="submit.click()">Create</button>
+            <button class="btn btn-primary p-1" (click)="submit.click()">Create</button>
         </div>
     </div>
-    <!-- <p class="copyright">Designed by <a href="https://colorlib.com" target="_blank" title="Colorlib">Colorlib</a>
-            </p> -->
-
-
-    <!-- <button (click)="test()"></button> -->
 </div>

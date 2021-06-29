@@ -15,7 +15,7 @@
                     <div>
                         <div class="input-group rounded">
                             <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
-                                aria-describedby="search-addon" [(ngModel)]="term" >
+                                aria-describedby="search-addon" [(ngModel)]="term">
                         </div>
                     </div>
                 </div>
@@ -25,7 +25,8 @@
                 <div class="col-md-4">
                     <div class="d-flex align-items-center justify-content-start flex-wrap">
                         <button id="border" style="margin-right: 1%;"><i class="fas fa-filter"></i></button>
-                        <ng-select class="w-25" [(ngModel)]="selectedTag" (change)="check(selectedTag)" matTooltip="Filter">
+                        <ng-select class="w-25" [(ngModel)]="selectedTag" (change)="check(selectedTag)"
+                            matTooltip="Filter">
 
                             <ng-option *ngFor="let tag of tags|async" [value]="tag.id">{{tag.name}}</ng-option>
                         </ng-select>
@@ -83,11 +84,12 @@
                         </table>
 
                         <td>
-                            <button (click)="openUpdateDialog(item)" matTooltip="Update" type="button" class="btn btn-primary btn-sm px-3"
-                                style="margin-right: 3px;">
+                            <button (click)="openUpdateDialog(item)" matTooltip="Update" type="button"
+                                class="btn btn-primary btn-sm px-3" style="margin-right: 3px;">
                                 <i class="fas fa-highlighter"></i>
                             </button>
-                            <button (click)="deleteItem(item.id)" matTooltip="Delete" type="button" class="btn btn-danger btn-sm px-3">
+                            <button (click)="deleteItem(item.id)" matTooltip="Delete" type="button"
+                                class="btn btn-danger btn-sm px-3">
                                 <i class="fas fa-times"></i>
                             </button>
                         </td>
@@ -126,23 +128,28 @@
                         </form>
                         <fieldset class="container" id="updateForm">
                             <div class="row" style="margin-bottom: 5%;">
+                                <div class="col-md-6">
+                                    <ng-select class="w-100" [(ngModel)]="selectedTag"
+                                        (change)="valChange(selectedTag)">
+                                        <ng-option *ngFor="let tag of tags|async" [value]="tag.id">{{tag.name}}
+                                        </ng-option>
+                                    </ng-select>
+                                </div>
+                                <div class="col-md ml-1">
+                                    <button class="h-100 p-2 btn-primary btn-lg" matTooltip="Add tag">
+                                        <i class="fas fa-plus" (click)="addUpdateTag()"></i>
+                                    </button>
+                                </div>
 
-                                <ng-select class=" w-25 col-md" [(ngModel)]="selectedTag"
-                                    (change)="valChange(selectedTag)">
-                                    <ng-option *ngFor="let tag of tags|async" [value]="tag.id">{{tag.name}}</ng-option>
-                                </ng-select>
 
-                                <button class="col-md btn-primary btn-lg btn-floating"  matTooltip="Add tag">
-                                    <i class="fas fa-plus" (click)="addUpdateTag()"></i>
-                                </button>
+
                             </div>
                         </fieldset>
                         <div class="row itemsBlock text-center" style="margin-bottom: 5%;" id="updateForm">
                             <div *ngFor="let item of currentTag;let i = index" class="col-md-4 col-sm-6 col-12">
-                                <!-- <h2 (click)="removeUpdateTag(i)">{{item.name}}</h2> -->
                                 <button type="button" class="mt-1 p-2 btn btn-outline-dark btn-rounded"
-                                    data-mdb-ripple-color="dark" (click)="removeUpdateTag(i)" matTooltip="Remove tag">{{item.name}} <i
-                                        class="fas fa-minus"></i></button>
+                                    data-mdb-ripple-color="dark" (click)="removeUpdateTag(i)"
+                                    matTooltip="Remove tag">{{item.name}} <i class="fas fa-minus"></i></button>
 
                             </div>
                         </div>

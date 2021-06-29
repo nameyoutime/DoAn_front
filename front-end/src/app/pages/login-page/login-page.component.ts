@@ -54,31 +54,17 @@ export class LoginPageComponent implements OnInit {
         })
         .catch((_error) => {
           this.error = _error;
-          this.router.navigate(['/login']);
+          // this.router.navigate(['/loginPage']);
         });
     }
   }
   loginWithGg() {
     try {
       this.authSer.loginWithGg();
+      
     } catch (error) {
-      console.log("error")
+      this.error = error;
       return;
     }
-    this.router.navigate(['/home'])
-  }
-  signOut() {
-    try {
-      this.authSer.signOut();
-
-
-    } catch (err) {
-      // alert("Sigout failed");
-
-    }
-  }
-
-  test() {
-    console.log(this.authSer.user);
   }
 }
